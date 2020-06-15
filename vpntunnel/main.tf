@@ -42,7 +42,7 @@ resource "google_compute_vpn_tunnel" "exist_new_tunnel" {
   peer_ip                 = data.google_compute_address.new_vpngw_ip[count.index].address
   target_vpn_gateway      = data.google_compute_vpn_gateway.existing_vpngw[count.index].id
   
-  shared_secret           = base64decode(file("encoded_secret.txt"))
+  shared_secret           = var.vpn_shared_secret
   local_traffic_selector  = ["0.0.0.0/0"]
   remote_traffic_selector = ["0.0.0.0/0"]
 }
@@ -55,7 +55,7 @@ resource "google_compute_vpn_tunnel" "new_exist_tunnel" {
   peer_ip                 = data.google_compute_address.existing_vpngw_ip[count.index].address
   target_vpn_gateway      = data.google_compute_vpn_gateway.new_vpngw[count.index].id
   
-  shared_secret           = base64decode(file("encoded_secret.txt"))
+  shared_secret           = var.vpn_shared_secret
   local_traffic_selector  = ["0.0.0.0/0"]
   remote_traffic_selector = ["0.0.0.0/0"]
 }

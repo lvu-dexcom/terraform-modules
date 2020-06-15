@@ -35,3 +35,8 @@ variable "region" {
   description = "GCP region"
   type        = string
 }
+
+variable "vpn_shared_secret" {
+  description = "vpn_shared_secret"
+  type        = string
+}
